@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """
-Simplified build script for Email Variations Generator
-Creates standalone executables using PyInstaller and uv
+Build script for Email Variations Generator
+Creates standalone executables using PyInstaller with uv dependency management
 
 Usage:
     python build.py
 
 Requirements:
     - uv package manager installed
-    - Dependencies installed (uv add pyqt6 pyinstaller)
+    - Fast, modern dependency management
 
 Output:
     - dist/EmailVariationsGenerator (Linux/Mac)
@@ -49,7 +49,7 @@ def clean_build():
 
 
 def build_executable():
-    """Build the executable using PyInstaller"""
+    """Build the executable using PyInstaller with uv dependency management"""
     print("Creating standalone executable...")
 
     system = platform.system().lower()
@@ -58,7 +58,7 @@ def build_executable():
     os.makedirs("dist", exist_ok=True)
     os.makedirs("build", exist_ok=True)
 
-    # Build command
+    # Build command using uv for dependency management
     cmd = [
         "uv",
         "run",
@@ -73,6 +73,12 @@ def build_executable():
         "build",
         "--specpath",
         "build",
+        "--hidden-import",
+        "PyQt6.QtCore",
+        "--hidden-import",
+        "PyQt6.QtWidgets",
+        "--hidden-import",
+        "PyQt6.QtGui",
         "main.py",
     ]
 
@@ -104,16 +110,30 @@ def main():
     print(f"🖥️  Platform: {platform.system()}")
     print(f"🐍 Python: {sys.version.split()[0]}")
 
+    # Check for required files
+    if not os.path.exists("pyproject.toml"):
+        print("❌ Error: pyproject.toml not found")
+        return 1
+
     if not os.path.exists("main.py"):
         print("❌ Error: main.py not found")
         return 1
 
+    print("✅ Using uv for fast dependency management")
+
     try:
         clean_build()
+
+        # Sync dependencies first
+        print("Syncing dependencies with uv...")
+        if not run_command(["uv", "sync"]):
+            print("❌ Failed to sync dependencies")
+            return 1
 
         if build_executable():
             print("\n🎉 Build completed successfully!")
             print("\n📋 The executable is ready for distribution")
+            print("💡 Built with uv's fast dependency management")
             return 0
         else:
             print("\n❌ Build failed!")

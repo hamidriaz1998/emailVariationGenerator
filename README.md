@@ -7,7 +7,7 @@ A powerful and user-friendly tool for generating email address variations, perfe
 ### 🎨 Modern GUI Interface
 
 - **Engaging Design**: Beautiful gradient backgrounds, modern styling, and intuitive layout
-- **Dark Mode Support**: Toggle between light and dark themes via the View menu
+- **Dark Mode Support**: Toggle between light and dark themes with a convenient button
 - **Animated Elements**: Hover effects, smooth transitions, and interactive buttons
 - **Real-time Feedback**: Progress bars, status updates, and visual indicators
 - **Professional Icons**: Emoji-enhanced interface for better user experience
@@ -48,7 +48,7 @@ A powerful and user-friendly tool for generating email address variations, perfe
 
 2. **Install dependencies**:
    ```bash
-   uv add pyqt6
+   uv sync
    ```
 
 ### Running the Application
@@ -71,6 +71,23 @@ python email_generator.py
 
 - **uv package manager**: [Install uv](https://docs.astral.sh/uv/getting-started/installation/)
 - Python 3.9 or higher
+
+### uv Dependency Management
+
+This project leverages **uv's fast dependency management** for optimal development and build experience:
+
+- **Lightning Fast**: Dependency resolution and installation in milliseconds
+- **Reliable**: Consistent dependency resolution across environments
+- **Modern**: Next-generation Python package management
+- **Zero Config**: Works seamlessly with standard Python packaging
+
+
+This configuration provides:
+
+- **Fast Resolution**: uv resolves dependencies in milliseconds
+- **Standard Compatibility**: Uses standard Python packaging
+- **Clean Dependencies**: Clear separation of runtime and build dependencies
+- **Version Constraints**: Proper version pinning for reproducible builds
 
 ### Build Process
 
@@ -101,6 +118,7 @@ After a successful build:
 - **Executable location**: `dist/EmailVariationsGenerator[.exe]`
 - **File size**: ~78MB (includes Python runtime and all dependencies)
 - **No Python required**: Runs on target machines without Python installation
+- **Dependency Management**: Powered by uv's lightning-fast dependency resolution
 
 ### Distribution
 
@@ -111,7 +129,7 @@ The generated executable is completely standalone and can be distributed without
 ### GUI Interface
 
 1. **Enter Email Address**: Type your base email address
-2. **Choose Theme**: Click the theme toggle button (🌙/☀️) in the top-right corner
+2. **Choose Theme**: Click the theme toggle button (🌙/☀️) in the header
 3. **Configure Options**:
    - Check "Include hyphen/underscore variations" if needed
    - Add custom keywords for + variations (optional)
@@ -147,6 +165,7 @@ The generated executable is completely standalone and can be distributed without
 
 - **Frontend**: PyQt6 for modern, cross-platform GUI
 - **Backend**: Pure Python with regex validation
+- **Dependency Management**: uv for fast, reliable package management
 - **Threading**: QThread for non-blocking operations
 - **Styling**: CSS-like styling with gradients and animations
 
@@ -238,6 +257,7 @@ Having trouble? Check out these resources:
 - 📂 Simplified file structure with main.py as entry point
 - 🔨 PyInstaller support for standalone executables
 - 📦 Cross-platform build scripts for Windows and Linux
+- 🚀 uv integration for lightning-fast dependency management
 
 ### Version 1.0
 

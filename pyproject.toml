@@ -13,16 +13,8 @@ dependencies = [
 emailgen = "main:main"
 
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 py-modules = ["main", "email_generator"]
-
-[tool.pyinstaller]
-name = "EmailVariationsGenerator"
-script = "main.py"
-icon = ""
-onefile = true
-windowed = true
-hidden-imports = ["PyQt6.QtCore", "PyQt6.QtWidgets", "PyQt6.QtGui"]

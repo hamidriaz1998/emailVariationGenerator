@@ -28,13 +28,22 @@ echo "Cleaning previous build artifacts..."
 rm -rf dist build *.spec
 echo "Previous builds cleaned"
 
+# Sync dependencies with uv
+echo
+echo "Syncing dependencies with uv..."
+if ! uv sync; then
+    echo "[ERROR] Failed to sync dependencies"
+    exit 1
+fi
+echo "[OK] Dependencies synced"
+
 # Create build directories
 mkdir -p dist
 mkdir -p build
 
-# Run PyInstaller to create executable
+# Run PyInstaller to create executable using uv dependency management
 echo
-echo "Creating standalone executable..."
+echo "Creating standalone executable with uv dependency management..."
 uv run pyinstaller \
     --onefile \
     --windowed \
@@ -42,6 +51,9 @@ uv run pyinstaller \
     --distpath "dist" \
     --workpath "build" \
     --specpath "build" \
+    --hidden-import "PyQt6.QtCore" \
+    --hidden-import "PyQt6.QtWidgets" \
+    --hidden-import "PyQt6.QtGui" \
     main.py
 
 if [ $? -eq 0 ]; then
@@ -60,6 +72,7 @@ if [ $? -eq 0 ]; then
         echo "[INFO] File size: ${size_mb}MB"
         echo
         echo "The executable is ready for distribution."
+        echo "Built with uv's fast dependency management."
         echo "No Python installation required on target machines."
     else
         echo "[WARNING] Executable not found in expected location"

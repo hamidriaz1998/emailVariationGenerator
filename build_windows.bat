@@ -34,13 +34,25 @@ if exist "dist" rmdir /s /q "dist"
 if exist "build" rmdir /s /q "build"
 del /q *.spec 2>nul
 
+REM Sync dependencies with uv
+echo.
+echo Syncing dependencies with uv...
+uv sync
+if %errorlevel% neq 0 (
+    echo [ERROR] Failed to sync dependencies
+    echo.
+    pause
+    exit /b 1
+)
+echo [OK] Dependencies synced
+
 REM Create build directories
 mkdir dist 2>nul
 mkdir build 2>nul
 
-REM Run PyInstaller to create executable
+REM Run PyInstaller to create executable using uv dependency management
 echo.
-echo Creating standalone executable...
+echo Creating standalone executable with uv dependency management...
 uv run pyinstaller ^
     --onefile ^
     --windowed ^
@@ -48,6 +60,9 @@ uv run pyinstaller ^
     --distpath "dist" ^
     --workpath "build" ^
     --specpath "build" ^
+    --hidden-import "PyQt6.QtCore" ^
+    --hidden-import "PyQt6.QtWidgets" ^
+    --hidden-import "PyQt6.QtGui" ^
     main.py
 
 if %errorlevel% equ 0 (
@@ -60,6 +75,7 @@ if %errorlevel% equ 0 (
         )
         echo.
         echo The executable is ready for distribution.
+        echo Built with uv's fast dependency management.
         echo No Python installation required on target machines.
     ) else (
         echo [WARNING] Executable not found in expected location
