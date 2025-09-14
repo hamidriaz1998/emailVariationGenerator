@@ -48,7 +48,7 @@ A powerful and user-friendly tool for generating email address variations, perfe
 
 2. **Install dependencies**:
    ```bash
-   pip install PyQt6
+   uv add pyqt6
    ```
 
 ### Running the Application
@@ -64,6 +64,47 @@ python main.py
 ```bash
 python email_generator.py
 ```
+
+## 🔨 Building Standalone Executables
+
+### Prerequisites
+
+- **uv package manager**: [Install uv](https://docs.astral.sh/uv/getting-started/installation/)
+- Python 3.9 or higher
+
+### Build Process
+
+#### Option 1: Cross-platform Python Script (Recommended)
+
+```bash
+python build.py
+```
+
+#### Option 2: Platform-specific Scripts
+
+**Windows:**
+
+```batch
+build_windows.bat
+```
+
+**Linux:**
+
+```bash
+./build_linux.sh
+```
+
+### Build Output
+
+After a successful build:
+
+- **Executable location**: `dist/EmailVariationsGenerator[.exe]`
+- **File size**: ~78MB (includes Python runtime and all dependencies)
+- **No Python required**: Runs on target machines without Python installation
+
+### Distribution
+
+The generated executable is completely standalone and can be distributed without any dependencies. Simply copy the file from the `dist/` folder to the target machine.
 
 ## 📱 How to Use
 
@@ -121,8 +162,9 @@ emailVariationGen/
 
 ### Dependencies
 
-- Python 3.7+
+- Python 3.9+
 - PyQt6
+- PyInstaller (for building executables)
 
 ## 🎯 Use Cases
 
@@ -187,13 +229,15 @@ Having trouble? Check out these resources:
 ### Version 2.0 (Latest)
 
 - ✨ Complete GUI redesign with modern styling
-- 🌙 Dark mode support with theme switching
+- 🌙 Dark mode support with theme toggle button
 - 📁 File path selection with browse dialog
 - ⚡ Threaded processing with progress indicators
 - 📊 Real-time statistics and feedback
 - 🎨 Enhanced visual design with animations
 - 🔧 Improved error handling and validation
 - 📂 Simplified file structure with main.py as entry point
+- 🔨 PyInstaller support for standalone executables
+- 📦 Cross-platform build scripts for Windows and Linux
 
 ### Version 1.0
 

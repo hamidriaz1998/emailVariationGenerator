@@ -1,9 +1,28 @@
 [project]
 name = "emailvariationgen"
 version = "0.1.0"
-description = "Add your description here"
+description = "Email Variations Generator Pro - Generate email address variations for testing and organization"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.9"
 dependencies = [
     "pyqt6>=6.9.1",
+    "pyinstaller>=6.0.0",
 ]
+
+[project.scripts]
+emailgen = "main:main"
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["main", "email_generator"]
+
+[tool.pyinstaller]
+name = "EmailVariationsGenerator"
+script = "main.py"
+icon = ""
+onefile = true
+windowed = true
+hidden-imports = ["PyQt6.QtCore", "PyQt6.QtWidgets", "PyQt6.QtGui"]
